@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kilombolas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: new google.maps.LatLng(-12.9924578,-38.5080714),
+          mapTypeId: 'roadmap'
+        });
+        var logo = 'img/mark2.png'
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+        var academias = [
+          {
+          	// scala
+            position: new google.maps.LatLng(-12.9940648,-38.5069904),
+            type: 'info',
+            description: '<h3 id="firstHeading" class="firstHeading">Academia do Contra-Mestre Scala</h3>'+
+            'Terças e quintas das 18hs as  19:30.<br />'+
+            '<b>Local:</b> Associação dos moradores da Ferreira Santos<br />'+
+            '<b>Contato: </b>'
+          }, {
+          	// alto da bola
+            position: new google.maps.LatLng(-12.9923591,-38.5037559),
+            type: 'info',
+            description: '<h3 id="firstHeading" class="firstHeading">Academia do Mestre João do Morro</h3>'+
+            'Segundas, quartas e quintas das 19hs as 21hs.<br />'+
+            '<b>Local:</b> Colégio Madre Judite<br />'+
+            '<b>Contato: </b>'
+          },
+          {
+          	// casa de joão
+            position: new google.maps.LatLng(-12.9896234,-38.510245),
+            type: 'info',
+            description: '<h3 id="firstHeading" class="firstHeading">Academia do Mestre João do Morro</h3>'+
+            'Terças e sextas das 19hs as 21hs.<br />'+
+            '<b>Local:</b> Subida do paredão do dique do tororó<br />'+
+            '<b>Contato: </b>'
+          },
+          {
+          	// centro social urbano da federação 
+            position: new google.maps.LatLng(-12.9960278,-38.499818),
+            type: 'info',
+            description: '<h3 id="firstHeading" class="firstHeading">Academia do Contra-Mestre Daniel</h3>'+
+            'Segundas, quartas e sextas das 19hs as 21hs.<br />'+
+            'Sábado das 9:00hs as 11hs da manhã<br />'+
+            '<b>Local:</b> Centro Social Urbano Federação<br />'+
+            '<b>Contato: </b>'
+          }
+          
+        ];
+
+        // Create markers.
+        academias.forEach(function(academia) {
+          var marker = new google.maps.Marker({
+            position: academia.position,
+            icon: logo,
+            map: map
+          });
+
+        var infowindow = new google.maps.InfoWindow({
+            content: academia.description
+          });
+
+
+          marker.addListener('click', function() {
+	        infowindow.open(map, marker);
+	      });
+
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxx9V5sE0Vy5yaAkOxooedFQWVX8DC294&callback=initMap">
+    </script>
+  </body>
+</html>
